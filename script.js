@@ -27,7 +27,7 @@ function newCard(number, color, i, who){
   if(who == "me"){
     myCards.push(newC);
     if(number == 13){
-      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='-1' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='-1'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
     } else{
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
     }
@@ -272,7 +272,7 @@ function changeMyHand(){
     var whereX = myCards[i].number * cardX;
     var whereY = myCards[i].color * cardY;
      if(myCards[i].number == 13){
-      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='-1' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='-1'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
     } else{
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
     }
