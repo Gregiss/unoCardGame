@@ -37,8 +37,8 @@ function newCard(number, color, i, who){
     myCards.push(newC);
     if(number == 13){
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='-1'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
-    } else if(number == 15){
-      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='-1'  style='background-position: "+more4+";'></div>");
+    } else if(number >= 15 && number <= 16){
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='15' data-cardcolor='-1'  style='background-position: "+more4+";'></div>");
     }else{
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
     }
@@ -50,7 +50,7 @@ function newCard(number, color, i, who){
 
 function generateCard(i, who){
   if(who == "me"){
-    var randomCard = Math.floor(Math.random() * 15);
+    var randomCard = Math.floor(Math.random() * 16);
     var randomColor = Math.floor(Math.random() * 4);
     newCard(randomCard, randomColor, i, "me");
   } else{
