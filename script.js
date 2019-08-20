@@ -244,7 +244,7 @@ function botComprar(){
 
 function changeMyHand(){
   $(".myhands").html("<div class='avatar'></div><div class='before'></div>");
-  for(var i = 0; i < enemyCards.length; i++){
+  for(var i = 0; i < myCards.length; i++){
     var whereX = myCards[i].number * cardX;
     var whereY = myCards[i].color * cardY;
     $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
@@ -264,7 +264,7 @@ function botCompraTwo(){
 
 function botCardChange(){
   $(".enemyhands").html("<div class='avatar'></div><div class='before'></div>");
-  for(var i = 0; i < myCards.length; i++){
+  for(var i = 0; i < enemyCards.length; i++){
     $(".enemyhands .before").before("<div class='card'></div>");
   }
 }
