@@ -83,6 +83,17 @@ function newBolinho(number, color){
   var whereY = color * cardY;
   $(".bolinho").html("<div class='card' style='background-position: "+whereX+"px "+whereY+"px;'></div>");
   console.log(number, color);
+  var colorText;
+  if(color == 0){
+    colorText = "var(--red)";
+  } else if(color == 1){
+    colorText = "var(--orange)";
+  } else if(color == 2){
+    colorText = "var(--green)";
+  } else if(color == 3){
+    colorText = "var(--blue)";
+  }
+  $(".bolinho").css("background", colorText);
 }
 
 function generateBolinho(){
