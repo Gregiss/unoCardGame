@@ -116,6 +116,7 @@ function generateBolinho(){
 }
 
 function jogar(){
+  timer[0].timer = 100;
   $(".myhands .card").click(function(){
     if(vez == 0){
     var myCardId = $(this).data("cardid");
@@ -249,6 +250,7 @@ function verificarSeGanhou(){
 }
 
 function botPlay(){
+  timer[1].timer = 100;
   setTimeout(function(){
   var jogou = false;
   if(vez == 1){
@@ -269,6 +271,7 @@ function botPlay(){
     botCardChange();
   }
     }, 4500);
+  timer[1].timer = 100;
 }
 
 function botComprar(){
@@ -320,7 +323,6 @@ function time(){
       } else{
         vez = 0;
         timer[1].timer = 100;
-        jogar();
       }
     }
     changeTime();
