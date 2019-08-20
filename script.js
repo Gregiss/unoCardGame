@@ -330,8 +330,10 @@ function time(){
 }
 
 function changeTime(){
-  $(".enemyhands .avatar .time .progress").css("height", timer[1].timer + "%");
-  $(".myhands .avatar .time .progress").css("height", timer[0].timer + "%");
+  if(ganhou == false){
+    $(".enemyhands .avatar .time .progress").css("height", timer[1].timer + "%");
+    $(".myhands .avatar .time .progress").css("height", timer[0].timer + "%");
+  }
 }
 
 function botCardChange(){
