@@ -168,7 +168,7 @@ function pulouVez(){
 }
 
 function bolinhoChangeColor(color){
-  newBolinho(13, color);
+  newBolinho(-1, color);
 }
 
 function showModal(what){
@@ -213,7 +213,9 @@ function trocarColor(){
     $(".modal").removeClass("modalActive");
     $(".modal").html("");
     possoTrocaCor = false;
+   setInterval(function(){
     botPlay();
+   }, 1000);
   });
 }
 
@@ -241,7 +243,7 @@ function botPlay(){
   var jogou = false;
   if(vez == 1){
     for(var i = 0; i < enemyCards.length; i++){
-      if(bolinho.number == 13 || bolinho.number == enemyCards[i].number || bolinho.color == enemyCards[i].color){
+      if(bolinho.number == enemyCards[i].number || bolinho.color == enemyCards[i].color){
         newBolinho(enemyCards[i].number, enemyCards[i].color);
         enemyCards.splice(i, 1);
         jogou = true;
