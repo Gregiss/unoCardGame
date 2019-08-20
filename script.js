@@ -249,6 +249,7 @@ function verificarSeGanhou(){
 }
 
 function botPlay(){
+  setTimeout(function(){
   var jogou = false;
   if(vez == 1){
     for(var i = 0; i < enemyCards.length; i++){
@@ -267,6 +268,7 @@ function botPlay(){
     vez = 0;
     botCardChange();
   }
+    }, 1500);
 }
 
 function botComprar(){
