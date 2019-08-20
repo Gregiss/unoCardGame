@@ -20,7 +20,7 @@ const winHtml = '<div class="txt"><h1>Você ganhou parabéns :D</h1><br> <h2>Des
 
 const EnemywinHtml = '<div class="txt"><h1>Você perdeu :/</h1><br> <h2>Deseja jogar novamente?</h2> <button id="playagain">Sim</button> <button id="menu">Não</button></div>';
 
-const newGameHtml = '<div class="myhands"> <div class="avatar"></div> <div class="before"></div> </div> <div class="enemyhands"> <div class="avatar"></div> <div class="before"></div> </div> <div class="bolinho"> <div class="card"></div> </div> <div class="comprar">Comprar carta</div>';
+const newGameHtml = '<div class="myhands"><div class="comprar"><p>Comprar carta</p></div> <div class="avatar"></div> <div class="before"></div> </div> <div class="enemyhands"> <div class="avatar"></div> <div class="before"></div> </div> <div class="bolinho">';
 
 function newCard(number, color, i, who){
   var newC = {number: number, color: color};
