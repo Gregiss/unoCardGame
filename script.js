@@ -10,6 +10,11 @@ var bolinho = [];
 
 var vez = 0;
 
+var timer = [
+  {"timer" : 100},
+  {"timer" : 100}
+];
+
 $("a").click(function(){
   return false;
 });
@@ -20,7 +25,7 @@ const winHtml = '<div class="txt"><h1>Você ganhou parabéns :D</h1><br> <h2>Des
 
 const EnemywinHtml = '<div class="txt"><h1>Você perdeu :/</h1><br> <h2>Deseja jogar novamente?</h2> <button id="playagain">Sim</button> <button id="menu">Não</button></div>';
 
-const newGameHtml = '<div class="myhands"><div class="comprar"><p>Comprar carta</p></div> <div class="avatar"></div> <div class="before"></div> </div> <div class="enemyhands"> <div class="avatar"></div> <div class="before"></div> </div> <div class="bolinho">';
+const newGameHtml = '<div class="myhands"><div class="comprar"><p>Comprar carta</p></div> <div class="avatar"><div class="time"><div class="progress"></div></div></div> <div class="before"></div> </div> <div class="enemyhands"> <div class="avatar"><div class="time"><div class="progress"></div></div></div> <div class="before"></div> </div> <div class="bolinho">';
 
 function newCard(number, color, i, who){
   var newC = {number: number, color: color};
@@ -128,7 +133,6 @@ function jogar(){
       } else{
         myCards.splice(posid, 1);
       }
-      console.log("Pode jogar");
       if(myCardId == 10){
       vez = 0;
       pulouVez();
@@ -143,8 +147,6 @@ function jogar(){
         vez = 1;
       }
     botPlay();
-    } else{
-      console.log("Não pode jogar " + myCardId + "|" + myCardColor);
     }
       changeMyHand();
     }
@@ -198,8 +200,8 @@ function showModal(what){
 function buttonsMsgModal(){
   $("#playagain").click(function(){
     ganhou = false;
-    $(".myhands").html('<div class="comprar"><p>Comprar carta</p></div><div class="avatar"></div> <div class="before"></div>');
-    $(".enemyhands").html('<div class="avatar"></div> <div class="before"></div>');
+    $(".myhands").html('<div class="comprar"><p>Comprar carta</p></div><div class="avatar"><div class="time"><div class="progress"></div></div></div> <div class="before"></div>');
+    $(".enemyhands").html('<div class="avatar"><div class="time"><div class="progress"></div></div></div> <div class="before"></div>');
     closeModal();
     newGame();
   });
@@ -276,7 +278,7 @@ function botComprar(){
 }
 
 function changeMyHand(){
-  $(".myhands").html("<div class='comprar'><p>Comprar carta</p></div><div class='avatar'></div><div class='before'></div>");
+  $(".myhands").html("<div class='comprar'><p>Comprar carta</p></div><div class='avatar'><div class='time'><div class='progress'></div></div></div><div class='before'></div>");
   for(var i = 0; i < myCards.length; i++){
     var whereX = myCards[i].number * cardX;
     var whereY = myCards[i].color * cardY;
@@ -300,8 +302,36 @@ function botCompraTwo(){
    botCardChange();
 }
 
+function time(){
+  setInterval(function(){
+    if(vez == 0){
+      if(timer[0].timer >= 0){
+        timer[0].timer--;
+      } else{
+        vez = 1;
+        botPlay();
+        timer[0].timer = 100;
+      }
+    } else if(vez == 1){
+      if(timer[1].timer >= 0){
+        timer[1].timer--;
+      } else{
+        vez = 0;
+        jogar();
+        timer[1].timer = 100;
+      }
+    }
+    changeTime();
+  }, 300);
+}
+
+function changeTime(){
+  $(".enemyhands .avatar .time .progress").css("height", timer[1].timer + "%");
+  $(".myhands .avatar .time .progress").css("height", timer[0].timer + "%");
+}
+
 function botCardChange(){
-  $(".enemyhands").html("<div class='avatar'></div><div class='before'></div>");
+  $(".enemyhands").html("<div class='avatar'><div class='time'><div class='progress'></div></div></div><div class='before'></div>");
   for(var i = 0; i < enemyCards.length; i++){
     $(".enemyhands .before").before("<div class='card'></div>");
   }
@@ -335,6 +365,7 @@ function newGame(){
   jogar();
   comprar();
   verificarSeGanhou();
+  time();
 }
 
 function main(){
