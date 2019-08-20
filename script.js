@@ -287,6 +287,7 @@ function changeMyHand(){
     }
   }
   jogar();
+  comprar();
 }
 
 function botCompraTwo(){
