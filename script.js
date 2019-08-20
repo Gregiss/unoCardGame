@@ -10,6 +10,8 @@ var bolinho = [];
 
 var vez = 0;
 
+var more4 = "-3119px -4322px";
+
 var timer = [
   {"timer" : 100},
   {"timer" : 100}
@@ -35,7 +37,9 @@ function newCard(number, color, i, who){
     myCards.push(newC);
     if(number == 13){
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='-1'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
-    } else{
+    } else if(number == 15){
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='-1'  style='background-position: "+more4+";'></div>");
+    }else{
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
     }
   } else{
@@ -46,7 +50,7 @@ function newCard(number, color, i, who){
 
 function generateCard(i, who){
   if(who == "me"){
-    var randomCard = Math.floor(Math.random() * 14);
+    var randomCard = Math.floor(Math.random() * 15);
     var randomColor = Math.floor(Math.random() * 4);
     newCard(randomCard, randomColor, i, "me");
   } else{
@@ -126,6 +130,10 @@ function jogar(){
       cardsEspeciais(13);
       vez = 1;
       myCards.splice(posid, 1);
+    } else if(myCardId == 15){
+      cardsEspeciais(15);
+      vez = 0;
+      myCards.splice(posid, 1);
     }
     if(bolinho.number == myCardId || bolinho.color == myCardColor || bolinho.number == 13){
       newBolinho(myCardId, myCardColor);
@@ -160,13 +168,19 @@ function cardsEspeciais(cardId){
   if(cardId == 13){
     possoTrocaCor = true;
     changeColor(cardId);
+  } else if(cardId == 15){
+    possoTrocaCor = true;
+    changeColor(cardId);
+    more4ToBot();
   }
 }
 
 function changeColor(cardId){
   if(possoTrocaCor){
-  if(cardId == 13){
+  if(cardId == 13 ){
     showModal("changeColor");
+  } else if(cardId == 15){
+    showModal("changeColor4");
   }
   }
 }
@@ -181,12 +195,20 @@ function bolinhoChangeColor(color){
   newBolinho(-1, color);
 }
 
+function bolinhoChangeColor4(color){
+  newBolinho(15, color);
+  $(".bolinho").html("<div class='card' style='background-position: "+more4+";'></div>");
+}
+
 function showModal(what){
   $(".modal").addClass("modalActive");
   if(what == "changeColor"){
     $(".modal").html(changeColorHtml);
     trocarColor();
-  } else if(what == "skip"){
+  } else if(what == "changeColor4"){
+    $(".modal").html(changeColorHtml);
+    trocarColor4();
+  }else if(what == "skip"){
     $(".modal").html('<div class="txt"> <h1>Você pulou a vez do Bot , é novamente sua vez :D</h1> </div>');
     setTimeout(function(){ closeModal(); }, 3000);
   } else if(what == "win"){
@@ -220,6 +242,19 @@ function trocarColor(){
   $(".changeColor .newcolor").click(function(){
     var color = $(this).data("id");
     bolinhoChangeColor(color);
+    $(".modal").removeClass("modalActive");
+    $(".modal").html("");
+    possoTrocaCor = false;
+   setInterval(function(){
+    botPlay();
+   }, 1000);
+  });
+}
+
+function trocarColor4(){
+  $(".changeColor .newcolor").click(function(){
+    var color = $(this).data("id");
+    bolinhoChangeColor4(color);
     $(".modal").removeClass("modalActive");
     $(".modal").html("");
     possoTrocaCor = false;
@@ -299,6 +334,16 @@ function changeMyHand(){
 
 function botCompraTwo(){
   for(var i = 0; i < 2; i++){
+    var randomCard = Math.floor(Math.random() * 10);
+    var randomColor = Math.floor(Math.random() * 4);
+    var newC = {number: randomCard, color: randomColor};
+    enemyCards.push(newC);
+  }
+   botCardChange();
+}
+
+function more4ToBot(){
+  for(var i = 0; i < 5; i++){
     var randomCard = Math.floor(Math.random() * 10);
     var randomColor = Math.floor(Math.random() * 4);
     var newC = {number: randomCard, color: randomColor};
