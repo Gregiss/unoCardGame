@@ -103,7 +103,6 @@ function jogar(){
     }
     if(bolinho.number == myCardId || bolinho.color == myCardColor || bolinho.number == 13){
       newBolinho(myCardId, myCardColor);
-      $(this).hide();
       myCards.splice(posid, 1);
       console.log("Pode jogar");
       if(myCardId == 10){
@@ -123,6 +122,7 @@ function jogar(){
     } else{
       console.log("Não pode jogar " + myCardId + "|" + myCardColor);
     }
+      changeMyHand();
     }
   });
 }
@@ -242,6 +242,15 @@ function botComprar(){
    botCardChange();
 }
 
+function changeMyHand(){
+  $(".myhands").html("<div class='avatar'></div><div class='before'></div>");
+  for(var i = 0; i < enemyCards.length; i++){
+    var whereX = myCards[i].number * cardX;
+    var whereY = myCards[i].color * cardY;
+    $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+  }
+}
+
 function botCompraTwo(){
   for(var i = 0; i < 2; i++){
     var randomCard = Math.floor(Math.random() * 10);
@@ -254,7 +263,7 @@ function botCompraTwo(){
 
 function botCardChange(){
   $(".enemyhands").html("<div class='avatar'></div><div class='before'></div>");
-  for(var i = 0; i < enemyCards.length; i++){
+  for(var i = 0; i < myCards.length; i++){
     $(".enemyhands .before").before("<div class='card'></div>");
   }
 }
