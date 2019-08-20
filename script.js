@@ -228,7 +228,7 @@ function botPlay(){
   var jogou = false;
   if(vez == 1){
     for(var i = 0; i < enemyCards.length; i++){
-      if(bolinho.number == enemyCards[i].number || bolinho.color == enemyCards[i].color || bolinho.number == 13){
+      if(bolinho.number == 13 || bolinho.number == enemyCards[i].number || bolinho.color == enemyCards[i].color){
         newBolinho(enemyCards[i].number, enemyCards[i].color);
         enemyCards.splice(i, 1);
         jogou = true;
