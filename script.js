@@ -276,7 +276,7 @@ function botComprar(){
 }
 
 function changeMyHand(){
-  $(".myhands").html("<div class='avatar'></div><div class='before'></div>");
+  $(".myhands").html("<div class='comprar'><p>Comprar carta</p></div><div class='avatar'></div><div class='before'></div>");
   for(var i = 0; i < myCards.length; i++){
     var whereX = myCards[i].number * cardX;
     var whereY = myCards[i].color * cardY;
