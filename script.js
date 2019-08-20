@@ -117,10 +117,15 @@ function jogar(){
     if(myCardId == 13){
       cardsEspeciais(13);
       vez = 1;
+      myCards.splice(posid, 1);
     }
     if(bolinho.number == myCardId || bolinho.color == myCardColor || bolinho.number == 13){
       newBolinho(myCardId, myCardColor);
-      myCards.splice(posid, 1);
+      if(myCardColor == -1){
+        return false; 
+      } else{
+        myCards.splice(posid, 1);
+      }
       console.log("Pode jogar");
       if(myCardId == 10){
       vez = 0;
