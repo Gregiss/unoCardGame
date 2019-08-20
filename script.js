@@ -323,7 +323,7 @@ function comprar(){
 function timeOutComprar(){
   setInterval(function(){
     possoComprar = true;
-  }, 1000);
+  }, 400);
 }
 
 function newGame(){
