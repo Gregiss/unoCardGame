@@ -26,7 +26,11 @@ function newCard(number, color, i, who){
   var whereY = color * cardY;
   if(who == "me"){
     myCards.push(newC);
-    $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+    if(number == 13){
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='-1' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+    } else{
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+    }
   } else{
     enemyCards.push(newC);
      $(".enemyhands .before").before("<div class='card'></div>");
@@ -180,6 +184,7 @@ function showModal(what){
     buttonsMsgModal();
   } else if(what == "enemywin"){
     $(".modal").html(EnemywinHtml);
+    buttonsMsgModal();
   }
 }
 
@@ -229,7 +234,7 @@ function verificarSeGanhou(){
     showModal("enemywin");
   }
   }
-  }, 1000);
+  }, 300);
 }
 
 function botPlay(){
