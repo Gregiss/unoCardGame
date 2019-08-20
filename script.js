@@ -18,6 +18,8 @@ const changeColorHtml = '<div class="changeColor"> <h1>Escolha uma nova cor</h1>
 
 const winHtml = '<div class="txt"><h1>Você ganhou parabéns :D</h1><br> <h2>Deseja jogar novamente?</h2> <button id="playagain">Sim</button> <button id="menu">Não</button></div>';
 
+const EnemywinHtml = '<div class="txt"><h1>Você perdeu :/</h1><br> <h2>Deseja jogar novamente?</h2> <button id="playagain">Sim</button> <button id="menu">Não</button></div>';
+
 function newCard(number, color, i, who){
   var newC = {number: number, color: color};
   var whereX = number * cardX;
@@ -176,6 +178,8 @@ function showModal(what){
   } else if(what == "win"){
     $(".modal").html(winHtml);
     buttonsMsgModal();
+  } else if(what == "enemywin"){
+    $(".modal").html(EnemywinHtml);
   }
 }
 
@@ -204,6 +208,7 @@ function trocarColor(){
     $(".modal").removeClass("modalActive");
     $(".modal").html("");
     possoTrocaCor = false;
+    botPlay();
   });
 }
 
@@ -219,6 +224,9 @@ function verificarSeGanhou(){
   if(myCards.length == 0){
     ganhou = true;
     showModal("win");
+  } else if(enemyCards.length == 0){
+    ganhou = true;
+    showModal("enemywin");
   }
   }
   }, 1000);
