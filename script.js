@@ -271,7 +271,11 @@ function changeMyHand(){
   for(var i = 0; i < myCards.length; i++){
     var whereX = myCards[i].number * cardX;
     var whereY = myCards[i].color * cardY;
-    $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+     if(myCards[i].number == 13){
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='-1' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+    } else{
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
+    }
   }
   jogar();
 }
