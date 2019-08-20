@@ -29,34 +29,29 @@ const EnemywinHtml = '<div class="txt"><h1>Você perdeu :/</h1><br> <h2>Deseja j
 
 const newGameHtml = '<div class="myhands"><div class="comprar"><p>Comprar carta</p></div> <div class="avatar"><div class="time"><div class="progress"></div></div></div> <div class="before"></div> </div> <div class="enemyhands"> <div class="avatar"><div class="time"><div class="progress"></div></div></div> <div class="before"></div> </div> <div class="bolinho">';
 
-function newCard(number, color, i, who){
+function newCard(number, color, who){
   var newC = {number: number, color: color};
   var whereX = number * cardX;
   var whereY = color * cardY;
   if(who == "me"){
     myCards.push(newC);
-    if(number == 13){
-      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='-1'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
-    } else if(number >= 15 && number <= 16){
-      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='15' data-cardcolor='-1'  style='background-position: "+more4+";'></div>");
-    }else{
-      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+number+"' data-cardcolor='"+color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
-    }
-  } else{
-    enemyCards.push(newC);
-     $(".enemyhands .before").before("<div class='card'></div>");
+  }
+  else{
+ enemyCards.push(newC);
   }
 }
 
-function generateCard(i, who){
+function generateCard(who){
   if(who == "me"){
     var randomCard = Math.floor(Math.random() * 16);
     var randomColor = Math.floor(Math.random() * 4);
-    newCard(randomCard, randomColor, i, "me");
+    newCard(randomCard, randomColor, "me");
+    changeMyHand();
   } else{
     var randomCard = Math.floor(Math.random() * 10);
     var randomColor = Math.floor(Math.random() * 4);
-    newCard(randomCard, randomColor, i, "enemy");
+    newCard(randomCard, randomColor, "enemy");
+    botCardChange();
   }
 }
 
@@ -64,13 +59,13 @@ hands();
 
 function generateMyHands(){
  for(var i = 0; i < 7; i++){
-   generateCard(i, "me");
+   generateCard("me");
  } 
 }
 
 function generateEnemyHands(){
   for(var i = 0; i < 7; i++){
-   generateCard(i, "enemy");
+   generateCard("enemy");
  }
 }
 
@@ -171,7 +166,6 @@ function cardsEspeciais(cardId){
   } else if(cardId == 15){
     possoTrocaCor = true;
     changeColor(cardId);
-    more4ToBot();
   }
 }
 
@@ -208,6 +202,7 @@ function showModal(what){
   } else if(what == "changeColor4"){
     $(".modal").html(changeColorHtml);
     trocarColor4();
+    more4ToBot();
   }else if(what == "skip"){
     $(".modal").html('<div class="txt"> <h1>Você pulou a vez do Bot , é novamente sua vez :D</h1> </div>');
     setTimeout(function(){ closeModal(); }, 3000);
@@ -324,7 +319,9 @@ function changeMyHand(){
     var whereY = myCards[i].color * cardY;
      if(myCards[i].number == 13){
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='-1'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
-    } else{
+    } else if(myCards[i].number >= 15 && myCards[i].number <= 17){
+      $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='-1'  style='background-position: "+more4+";'></div>");
+    }  else{
       $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
     }
   }
@@ -343,7 +340,7 @@ function botCompraTwo(){
 }
 
 function more4ToBot(){
-  for(var i = 0; i < 5; i++){
+  for(var i = 0; i < 4; i++){
     var randomCard = Math.floor(Math.random() * 10);
     var randomColor = Math.floor(Math.random() * 4);
     var newC = {number: randomCard, color: randomColor};
@@ -394,7 +391,7 @@ function comprar(){
   $(".comprar").click(function(){
     if(possoComprar == true){
     possoComprar = false;
-    generateCard(myCards.length, "me");
+    generateCard("me");
     jogar();
     } else{
       timeOutComprar();
