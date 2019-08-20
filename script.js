@@ -198,7 +198,7 @@ function showModal(what){
 function buttonsMsgModal(){
   $("#playagain").click(function(){
     ganhou = false;
-    $(".myhands").html('<div class="avatar"></div> <div class="before"></div>');
+    $(".myhands").html('<div class="comprar"><p>Comprar carta</p></div><div class="avatar"></div> <div class="before"></div>');
     $(".enemyhands").html('<div class="avatar"></div> <div class="before"></div>');
     closeModal();
     newGame();
@@ -324,7 +324,7 @@ function comprar(){
 function timeOutComprar(){
   setInterval(function(){
     possoComprar = true;
-  }, 400);
+  }, 100);
 }
 
 function newGame(){
