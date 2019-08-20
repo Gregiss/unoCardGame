@@ -249,6 +249,7 @@ function changeMyHand(){
     var whereY = myCards[i].color * cardY;
     $(".myhands .before").before("<div class='card' data-id='"+i+"' data-cardid='"+myCards[i].number+"' data-cardcolor='"+myCards[i].color+"'  style='background-position: "+whereX+"px "+whereY+"px;'></div>");
   }
+  play();
 }
 
 function botCompraTwo(){
