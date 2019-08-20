@@ -268,7 +268,7 @@ function botPlay(){
     vez = 0;
     botCardChange();
   }
-    }, 1500);
+    }, 4500);
 }
 
 function botComprar(){
@@ -311,16 +311,16 @@ function time(){
         timer[0].timer--;
       } else{
         vez = 1;
-        botPlay();
         timer[0].timer = 100;
+        botPlay();
       }
     } else if(vez == 1){
       if(timer[1].timer >= 0){
         timer[1].timer--;
       } else{
         vez = 0;
-        jogar();
         timer[1].timer = 100;
+        jogar();
       }
     }
     changeTime();
