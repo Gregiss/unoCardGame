@@ -406,6 +406,8 @@ function timeOutComprar(){
 }
 
 function newGame(){
+  myCards = [];
+  enemyCards = [];
   generateMyHands();
   generateEnemyHands();
   showCard();
